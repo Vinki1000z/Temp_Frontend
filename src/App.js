@@ -15,7 +15,7 @@ const App = () => {
     try {
       setError(null);
       const jsonData = JSON.parse(input);
-      const res = await axios.post("http://localhost:5000/bfhl", jsonData);
+      const res = await axios.post("https://temp-backend-38ls.vercel.app/bfhl", jsonData);
       setResponse(res.data);
       alert('Submission successful!');
     } catch (err) {
