@@ -15,7 +15,7 @@ const App = () => {
     try {
       setError(null);
       const jsonData = JSON.parse(input);
-      const res = await axios.post("https://temp-backend-38ls.vercel.app/bfhl", jsonData);
+      const res = await axios.post("http://localhost:5000/bfhl", jsonData);
       setResponse(res.data);
       alert('Submission successful!');
     } catch (err) {
@@ -29,20 +29,29 @@ const App = () => {
     console.log(selectedOptions);
     const { name, checked } = event.target;
     setSelectedOptions((prev) => ({ ...prev, [name]: checked }));
-    console.log(event.target.checked);
+    // console.log(event.target.checked);
   };
 
   const renderResponse = () => {
     if (!response) return null;
-
-    const data = {};
-    if (selectedOptions.numbers) data.numbers = response.numbers;
-    if (selectedOptions.alphabets) data.alphabets = response.alphabets;
-    if (selectedOptions.highestAlphabet)
-      data.highestAlphabet = response.highest_alphabet;
-
-    return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  
+    let formattedResponse = '';
+  
+    if (selectedOptions.numbers) {
+      formattedResponse += `Numbers: ${response.numbers.join(', ')}\n`;
+    }
+  
+    if (selectedOptions.alphabets) {
+      formattedResponse += `Alphabets: ${response.alphabets.join(', ')}\n`;
+    }
+  
+    if (selectedOptions.highestAlphabet) {
+      formattedResponse += `Highest Alphabet: ${response.highest_alphabet.join(', ')}\n`;
+    }
+  
+    return <pre>{formattedResponse.trim()}</pre>;
   };
+  
 
   return (
     <div className="container">
