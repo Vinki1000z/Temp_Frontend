@@ -48,7 +48,7 @@ const App = () => {
       
       const res = await axios.post("https://temp-backend-five.vercel.app/bfhl", payload);
       setResponse(res.data);
-      // console.log(res.data);
+      console.log(res.data);
       alert('Submission successful!');
     } catch (err) {
       setError("Invalid JSON or server error");
